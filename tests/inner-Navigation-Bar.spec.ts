@@ -9,6 +9,8 @@ The logic behind this test is we're doing a few things and making some assumptio
 
 I'm sure we can expand this test further, but this is a good start.
 */
+
+// Docs button/page test
 test("Select the docs button and verify it goes to the next page", async ({page}) => {
     //Navigate to the Playwright website
      await page.goto("https://playwright.dev/");
@@ -27,4 +29,21 @@ test("Select the docs button and verify it goes to the next page", async ({page}
     await expect(introductionHeading).toBeVisible();
 });
 
+//API button/page test
+test("Select the API button and verify it goes to the next page", async ({page}) => {
+    //Navigate to the Playwright website
+    await page.goto("https://playwright.dev/");
 
+    //Click on the API button in the navigation bar
+     await page.getByRole('link', { name: 'API' }).click();
+
+    //Verify that the URL is correct
+    await expect(page).toHaveURL("https://playwright.dev/docs/api/class-playwright");
+
+    //Verify it landed on the correct page by checking for two headings
+    const apiHeading = page.locator('h1', { hasText: 'Playwright Library' });
+    await expect(apiHeading).toBeVisible();
+
+    const propertiesHeading = page.locator('h2', { hasText: 'Properties' });
+    await expect(propertiesHeading).toBeVisible();
+});
