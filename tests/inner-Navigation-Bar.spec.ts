@@ -49,3 +49,50 @@ test("Select the API button and verify it goes to the next page", async ({page})
     const propertiesHeading = page.locator('h2', { hasText: 'Properties' });
     await expect(propertiesHeading).toBeVisible();
 });
+
+/* Programming language aka "Node.js" button/page test
+This is going to be a little different due to it being a hover > click action.
+We're going to have to open the button to trigger the popup perhaps .hover(), then click the buttons.
+*/
+test("Verify the node.js button is the default and active first selection", async ({page}) => {
+    //Navigate to the Playwright website
+    await page.goto("https://playwright.dev/");
+
+    //Expand on that tricky button hover situation to actually grab what's going on.
+    await page.getByRole('button', { name: 'Node.js' }).click();
+
+    //Find the Node.js option in the language dropdown and verify it's active
+    const nodeJSPage = page.getByRole('link', { name: 'Node.js' });  
+    await expect(nodeJSPage).toContainClass("dropdown__link--active")
+});
+
+test("Select the buttons in the programming languages popup and verify they go to the correct pages", async ({page}) => {
+    //Navigate to the Playwright website
+    await page.goto("https://playwright.dev/");
+
+    /*
+    Expand on that tricky button hover situation to actually grab what's going on.
+    It's going to be redundant, but we need to hover over the button to make the popup appear after page reloads.
+    */
+   
+   // Node.js
+    await page.getByRole('button', { name: 'Node.js' }).hover();
+    await page.getByRole('link', { name: 'Node.js' }).click();
+    await expect(page).toHaveURL("https://playwright.dev/");
+
+    // Python
+    await page.getByRole('button', { name: 'Node.js' }).hover();
+    await page.locator('a[href="/python/"]').click();
+    await expect(page).toHaveURL("https://playwright.dev/python/");
+  
+    // Java
+    await page.getByRole('button', { name: 'Python' }).hover();
+    await page.locator('a[href="/java/"]').click();
+    await expect(page).toHaveURL("https://playwright.dev/java/");
+ 
+
+    // .NET
+    await page.getByRole('button', { name: 'Java' }).hover();
+    await page.locator('a[href="/dotnet/"]').click();
+    await expect(page).toHaveURL("https://playwright.dev/dotnet/");
+}); 
