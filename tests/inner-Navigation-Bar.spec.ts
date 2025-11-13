@@ -95,4 +95,4 @@ test("Select the buttons in the programming languages popup and verify they go t
     await page.getByRole('button', { name: 'Java' }).hover();
     await page.locator('a[href="/dotnet/"]').click();
     await expect(page).toHaveURL("https://playwright.dev/dotnet/");
-}); g
+});
