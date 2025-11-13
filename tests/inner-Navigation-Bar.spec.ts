@@ -73,6 +73,7 @@ test("Select the buttons in the programming languages popup and verify they go t
     /*
     Expand on that tricky button hover situation to actually grab what's going on.
     It's going to be redundant, but we need to hover over the button to make the popup appear after page reloads.
+    We also have to consider the dropdown changes based on what was last selected.
     */
    
    // Node.js
