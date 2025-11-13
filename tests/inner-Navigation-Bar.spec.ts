@@ -3,9 +3,11 @@ import {test, expect} from "@playwright/test";
 /*
 The logic behind this test is we're doing a few things and making some assumptions.
 1. Navigate to the Playwright website.
-2. Click on the "Docs" button in the navigation bar.
+2. Click on the button in the navigation bar.
 3. Verify that the URL is correct.
 4. Verify that we landed on the correct page by checking for specific headings.
+
+Note: we're only replicating logic in some areas as some of the buttons literally go to the same layout, this'll vary based on contents.
 
 I'm sure we can expand this test further, but this is a good start.
 */
